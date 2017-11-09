@@ -57,8 +57,26 @@ functions:
     handler: articles/create.handler
     events:
       - http:
-          path: createArticle
+          path: articles
           method: post
+  readArticle:
+    handler: articles/read.handler
+    events:
+      - http:
+          path: articles
+          method: get         
+  updateArticle:
+    handler: articles/update.handler
+    events:
+      - http:
+          path: articles
+          method: put         
+  deleteArticle:
+    handler: articles/delete.handler
+    events:
+      - http:
+          path: articles
+          method: delete         
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
 #      - sns: greeter-topic
@@ -86,13 +104,18 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
+resources:
+  Resources:
+    BlogTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: BlogTable
+        AttributeDefinitions:
+          - AttributeName: article_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: article_id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
