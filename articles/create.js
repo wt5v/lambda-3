@@ -5,13 +5,13 @@ const dynamo = new AWS.DynamoDB.DocumentClient();
 
 module.exports.handler = (event, context, callback) => {
   const data = JSON.parse(event.body);
-  //const data = "Hello world!"
+  console.log(data);
+  
   if (data.text && typeof data.text !== 'string') {
     console.error('Validation Failed');
     callback(new Error('Body did not contain a text property'));
     return;
   }
-  console.log(data);
   
   const params = {
     TableName: 'BlogTable',
