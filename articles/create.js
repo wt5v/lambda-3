@@ -5,8 +5,7 @@ const uuid = require('uuid');
 const dynamo = new AWS.DynamoDB.DocumentClient();
 
 module.exports.handler = (event, context, callback) => {
-  //const data = JSON.parse(event.body);
-  const data = "Hello World!"
+  const data = JSON.parse(event.body);
   console.log(data);
   
   if (data.text && typeof data.text !== 'string') {
