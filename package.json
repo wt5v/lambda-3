@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/wt5v/lambda-3#readme",
   "dependencies": {
-    "aws-sdk": "^2.148.0"
+    "aws-sdk": "^2.148.0",
+    "uuid": "^3.1.0"
   }
 }

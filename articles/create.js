@@ -1,10 +1,12 @@
 'use strict';
 
 const AWS = require('aws-sdk');
+const uuid = require('uuid');
 const dynamo = new AWS.DynamoDB.DocumentClient();
 
 module.exports.handler = (event, context, callback) => {
-  const data = JSON.parse(event.body);
+  //const data = JSON.parse(event.body);
+  const data = "Hello World!"
   console.log(data);
   
   if (data.text && typeof data.text !== 'string') {
@@ -16,7 +18,7 @@ module.exports.handler = (event, context, callback) => {
   const params = {
     TableName: 'BlogTable',
     Item: {
-      article_id: "1",
+      article_id: uuid.v1(),
       text: data.text
     },
   };
