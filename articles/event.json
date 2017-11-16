@@ -1,3 +1,6 @@
 {
-    "body": "Hello World!"
-};
+    "body": {
+        "id": "",
+        "text": "Hello World!"
+    }
+}
