@@ -41,22 +41,31 @@ const deleteArticle = (event, callback) => {
 
 // private functions
 const validateAttributes = (event, callback) => {
-    //const body = JSON.parse(event.body);
-    if (event.body && typeof event.body.text !== 'string') {
+    const body = JSON.parse(event.body);
+    if (typeof body.text !== 'string') {
         console.error('Validation Failed');
         callback(new Error ('Body did not contain a text property of type string'));
         process.execPath(1);
     }
-}
+};
 
 const validateId = (event, callback) => {
-    //const body = JSON.parse(event.body);
-    if (event.body && typeof event.body.article_id !== 'string') {
+    const body = JSON.parse(event.body);
+    if (typeof body.article_id !== 'string') {
         console.error("Validation Failed");
         callback(new Error('Body didn not contain an article_id property of type string.'));
         process.exit(1);
     }
-}
+};
+
+const validateGetId = (event, callback) => {
+    const params = event.pathParameters;
+    if (typeof params.id !== 'string') {
+        console.error('Validation Failed');
+        callback(new Error('No id path parameter of type string. Please use GET articles/{id}.'));
+        process.exit(1);
+    }
+};
 
 module.exports = {
     Article: Article,
