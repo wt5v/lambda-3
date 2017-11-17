@@ -12,11 +12,4 @@ module.exports.handler = (event, context, callback) => {
   const dynamoDAO = new DynamoDAO(dynamo, 'BlogTable');
   const controller = new ArticleController(dynamoDAO);
   controller.deleteArticle(article, callback);  
-/*  const response = {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Article deleted.'
-    }),
-  };
-  callback(null, response); */
 };

@@ -51,16 +51,16 @@ module.exports = class DynamoDAO {
     }
     
     update(model, callback) {
-            const params = {
+        const params = {
             TableName: this.table,
             Key: {
                 article_id: model.article_id
             },
             UpdateExpression: 'set #name = :value',
-            ExpressionAttributeName: {
-                '#Name': 'text'
+            ExpressionAttributeNames: {
+                '#name': 'text'
             },
-            ExpessionAttributeValues: {
+            ExpressionAttributeValues: {
                 ':value': model.text
             }
         };

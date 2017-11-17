@@ -12,6 +12,14 @@ module.exports = class ArticleController {
             if (error) {
                 callback(error);
             } else {
+                const response = {
+                    statusCode: 200,
+                    headers: {
+                        "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+                        "Access-Control-Allow-Credentials": true // Required for cookies, authorization headers with HTTPS
+                    },
+                    body: JSON.stringify(article)
+                };                
                 callback(null, result);
             }
         });
@@ -22,6 +30,14 @@ module.exports = class ArticleController {
             if (error) {
                 callback(error);
             } else {
+                const response = {
+                    statusCode: 200,
+                    headers: {
+                        "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+                        "Access-Control-Allow-Credentials": true // Required for cookies, authorization headers with HTTPS
+                    },
+                    body: JSON.stringify(article)
+                };                
                 callback(null, result);
             }
         });        
@@ -32,16 +48,32 @@ module.exports = class ArticleController {
             if (error) {
                 callback(error);
             } else {
+                const response = {
+                    statusCode: 200,
+                    headers: {
+                        "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+                        "Access-Control-Allow-Credentials": true // Required for cookies, authorization headers with HTTPS
+                    },
+                    body: JSON.stringify(article)
+                };                
                 callback(null, result);
             }
         });        
     }    
     
-    delet3Article(article, callback) {
+    deleteArticle(article, callback) {
         this.dbDAO.delete(article, (error, result) => {
             if (error) {
                 callback(error);
             } else {
+                const response = {
+                    statusCode: 200,
+                    headers: {
+                        "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+                        "Access-Control-Allow-Credentials": true // Required for cookies, authorization headers with HTTPS
+                    },
+                    body: JSON.stringify(article)
+                };                
                 callback(null, result);
             }
         });        

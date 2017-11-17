@@ -18,9 +18,9 @@ const createArticle = (event, callback) => {
 }
 
 const readArticle = (event, callback) => {
-    validateId(event, callback);
-    const body = JSON.parse(event.body);
-    const id = body.article_id;
+    validateGetId(event, callback);
+    const params = event.pathParameters;
+    const id = params.id;
     return new Article(id);
 }
 
@@ -28,8 +28,9 @@ const updateArticle = (event, callback) => {
     validateId(event, callback);
     validateAttributes(event, callback);
     const body = JSON.parse(event.body);
-    const id = JSON.parse(body.article_id);
-    return new Article(id);
+    const id = body.article_id;
+    const text = body.text;
+    return new Article(id, text);
 }
 
 const deleteArticle = (event, callback) => {
@@ -53,7 +54,7 @@ const validateId = (event, callback) => {
     const body = JSON.parse(event.body);
     if (typeof body.article_id !== 'string') {
         console.error("Validation Failed");
-        callback(new Error('Body didn not contain an article_id property of type string.'));
+        callback(new Error('Body did not contain an article_id property of type string.'));
         process.exit(1);
     }
 };
