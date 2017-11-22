@@ -3,18 +3,20 @@
 const uuid = require('uuid');
 
 class Article {
-    constructor (id, text) {
+    constructor (id, user_id, text) {
         this.article_id = id;
         this.text = text;
+        this.user_id;
     }
 }
 
-const createArticle = (event, callback) => {
+const createArticle = (event, context, callback) => {
     validateAttributes(event, callback);
     const body = JSON.parse(event.body);
     const id = uuid.v1();
     const text = body.text;
-    return new Article(id, text);
+    const user_id = context.identity.congnitoIdentityId;
+    return new Article(id, user_id, text);
 }
 
 const readArticle = (event, callback) => {
@@ -24,13 +26,14 @@ const readArticle = (event, callback) => {
     return new Article(id);
 }
 
-const updateArticle = (event, callback) => {
+const updateArticle = (event, context, callback) => {
     validateId(event, callback);
     validateAttributes(event, callback);
     const body = JSON.parse(event.body);
     const id = body.article_id;
     const text = body.text;
-    return new Article(id, text);
+    const user_id = context.identity.congnitoIdentityId;
+    return new Article(id, user_id, text);
 }
 
 const deleteArticle = (event, callback) => {
